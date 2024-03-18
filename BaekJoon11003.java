@@ -10,32 +10,32 @@ public class BaekJoon11003 {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
         int L = Integer.parseInt(st.nextToken());
+
         st = new StringTokenizer(br.readLine());
-        Deque<Node> mydeque = new LinkedList<>();
+        Deque<Node> myDeque = new LinkedList<>();
+
         for (int i = 0; i < N; i++) {
-            int now = Integer.parseInt(st.nextToken());
-
-            while (!mydeque.isEmpty() && mydeque.getLast().value > now) {
-                mydeque.removeLast();
+            int t = Integer.parseInt(st.nextToken());
+            while (!myDeque.isEmpty() && myDeque.getLast().num > t) {
+                myDeque.removeLast();
             }
-            mydeque.addLast(new Node(now, i));
-
-            if (mydeque.getFirst().index <= i - L) {
-                mydeque.removeFirst();
+            myDeque.add(new Node(i, t));
+            while (!myDeque.isEmpty() && myDeque.getFirst().index <= i - L) {
+                myDeque.removeFirst();
             }
-            bw.write(mydeque.getFirst().value + " ");
+            bw.write(myDeque.getFirst().num + " ");
         }
         bw.flush();
         bw.close();
     }
 
     static class Node {
-        public int value;
         public int index;
+        public int num;
 
-        Node(int value, int index) {
-            this.value = value;
+        Node(int index, int num) {
             this.index = index;
+            this.num = num;
         }
     }
 }
